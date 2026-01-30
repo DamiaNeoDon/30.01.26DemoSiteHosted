@@ -212,11 +212,120 @@
           <li>Osoby szukające unikatowych prezentów</li>
         </ul>
       </div>
+          <div class="section">
+        <h3>Wybrane prace</h3>
+        <div class="gallery">
+          <img src="https://www.pixnoy.com/media/lot_w_splot_1.jpg" alt="Makrama — projekt autorski" />
+          <img src="https://www.pixnoy.com/media/lot_w_splot_2.jpg" alt="Rękodzieło — detal splotu" />
+          <img src="https://www.pixnoy.com/media/lot_w_splot_3.jpg" alt="Dekoracja wnętrza — makrama" />
+        </div>
+      </div>
     </div>
   </div>
 
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    /*
+      AUTO-GALERIA INSTAGRAM (LEKKA, CACHE LOKALNY)
+      -------------------------------------------
+      Jak to działa:
+      - Pobiera publiczny JSON z profilu Instagram przez pośredni serwis (bez tokenów)
+      - Zapisuje wyniki w localStorage na 6h
+      - Wypełnia galerię najnowszymi zdjęciami
+
+      Jeśli chcesz pełną stabilność (produkcja / firma):
+      podmień fetch URL na własny endpoint (np. Cloudflare Worker / Netlify Function)
+    */
+
+    const IG_USER = "lot_w_splot";
+    const CACHE_KEY = "ig_cache_lot_w_splot";
+    const CACHE_TTL = 6 * 60 * 60 * 1000; // 6 godzin
+
+    const gallery = document.querySelector('.gallery');
+
+    function getCache() {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw);
+        if (Date.now() - parsed.time > CACHE_TTL) return null;
+        return parsed.data;
+      } catch {
+        return null;
+      }
+    }
+
+    function setCache(data) {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        time: Date.now(),
+        data
+      }));
+    }
+
+    function render(images) {
+      gallery.innerHTML = "";
+      images.slice(0, 6).forEach(url => {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = "Projekt makramy — Lot w Splot";
+        gallery.appendChild(img);
+      });
+    }
+
+    async function loadInstagram() {
+      const cached = getCache();
+      if (cached) {
+        render(cached);
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://r.jina.ai/https://www.instagram.com/${IG_USER}/?__a=1`);
+        const text = await res.text();
+
+        const matches = [...text.matchAll(/"display_url":"(https:[^\"]+)"/g)];
+        const images = matches.map(m => m[1].replace(/\u0026/g, '&'));
+
+        if (images.length) {
+          setCache(images);
+          render(images);
+        }
+      } catch (e) {
+        console.warn('Nie udało się załadować Instagrama, używam statycznych zdjęć.');
+      }
+    }
+
+    loadInstagram();
   </script>
 </body>
 </html>
