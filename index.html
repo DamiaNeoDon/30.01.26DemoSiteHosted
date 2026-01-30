@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8" />
-  <title>Lot w Splot — Rękodzieło | Ewa Monika Jankowska</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Lot w Splot — autorskie makramy, dekoracje i rękodzieło na zamówienie. Naturalne formy, spokojna estetyka, unikatowe projekty." />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
+<style>
     :root {
-      /* Paleta inspirowana bawełną, drewnem i lnem */
       --bg: #f1ece4;
       --ink: #2b241d;
       --soft: #d6c9b6;
@@ -25,13 +16,7 @@
       font-family: Inter, sans-serif;
       background:
         linear-gradient(180deg, rgba(255,255,255,0.6), rgba(241,236,228,0.9)),
-        repeating-linear-gradient(
-          45deg,
-          rgba(176,138,90,0.04),
-          rgba(176,138,90,0.04) 2px,
-          transparent 2px,
-          transparent 8px
-        );
+        repeating-linear-gradient(45deg, rgba(176,138,90,0.04), rgba(176,138,90,0.04) 2px, transparent 2px, transparent 8px);
       color: var(--ink);
       min-height: 100vh;
       display: flex;
@@ -44,19 +29,17 @@
       max-width: 920px;
       width: 100%;
       background: var(--card);
-      border-radius: 32px;
-      box-shadow:
-        0 50px 100px rgba(0,0,0,0.12),
-        inset 0 1px 0 rgba(255,255,255,0.8);
+      border-radius: 36px;
+      box-shadow: 0 50px 120px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.85);
       padding: 4rem 4.5rem;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 4rem;
       position: relative;
       overflow: hidden;
+      animation: fadeIn 1.2s ease-out;
     }
 
-    /* Subtelny makramowy wzór SVG w tle karty */
     .card::before {
       content: "";
       position: absolute;
@@ -66,31 +49,42 @@
       pointer-events: none;
     }
 
-    .brand, .panel {
-      position: relative;
-      z-index: 1;
-    }
+    .brand, .panel { position: relative; z-index: 1; }
 
     .hero {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       overflow: hidden;
-      box-shadow: 0 25px 55px rgba(0,0,0,0.25);
-      margin-bottom: 2.5rem;
-      border: 8px solid var(--rope);
+      box-shadow: 0 25px 65px rgba(0,0,0,0.28);
+      margin-bottom: 3rem;
+      border: 10px solid var(--rope);
       background: var(--rope);
+      position: relative;
+      animation: float 6s ease-in-out infinite alternate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      box-shadow: 0 0 40px rgba(176,138,90,0.15) inset;
+      pointer-events: none;
     }
 
     .hero img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.5s ease;
     }
+
+    .hero img:hover { transform: scale(1.05) rotate(-2deg); }
 
     .brand h1 {
       font-family: "Playfair Display", serif;
-      font-size: 3.4rem;
+      font-size: 3.6rem;
       margin: 0 0 1rem;
       letter-spacing: 1.5px;
     }
@@ -105,10 +99,11 @@
     }
 
     .about {
-      font-size: 1.1rem;
-      line-height: 1.9;
+      font-size: 1.15rem;
+      line-height: 2;
       color: #4b3f32;
-      max-width: 460px;
+      max-width: 480px;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.2);
     }
 
     .highlight {
@@ -117,14 +112,10 @@
       border-left: 5px solid var(--rope);
       color: #6b5a45;
       font-style: italic;
+      letter-spacing: 0.5px;
     }
 
-    .panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 3rem;
-    }
+    .panel { display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; }
 
     .section h3 {
       margin: 0 0 1.2rem;
@@ -134,20 +125,9 @@
       color: var(--accent);
     }
 
-    .list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      line-height: 2;
-      color: #3a3026;
-    }
+    .list { list-style: none; padding: 0; margin: 0; line-height: 2; color: #3a3026; }
 
-    .cta {
-      margin-top: 3rem;
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
+    .cta { margin-top: 3rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
 
     .btn {
       text-decoration: none;
@@ -159,258 +139,5 @@
       transition: all 0.3s ease;
     }
 
-    .btn.primary {
-      background: linear-gradient(180deg, #4a3a2a, #2b241d);
-      color: #f5efe6;
-    }
-
-    .btn.primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-    }
-
-    .btn.secondary {
-      border: 3px solid var(--rope);
-      color: var(--ink);
-      background: transparent;
-    }
-
-    .btn.secondary:hover {
-      background: var(--rope);
-    }
-
-    footer {
-      margin-top: 3rem;
-      font-size: 0.75rem;
-      color: #8a775f;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-      margin-top: 1rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 20px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.18);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border: 4px solid var(--rope);
-    }
-
-    .gallery img:hover {
-      transform: scale(1.1) rotate(-1.5deg);
-      box-shadow: 0 40px 80px rgba(0,0,0,0.35);
-    }
-
-    @media (max-width: 768px) {
-      .card {
-        grid-template-columns: 1fr;
-        padding: 3rem;
-      }
-
-      .brand h1 {
-        font-size: 2.5rem;
-      }
-
-      .gallery {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <div class="brand">
-      <div class="hero">
-        <img id="profilePic" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=60" alt="Ewa Monika Jankowska — Lot w Splot" />
-      </div>
-      <span>Rękodzieło · Makrama · Projekty na zamówienie</span>
-      <h1>Lot w Splot</h1>
-      <p class="about">
-        Tworzę unikatowe formy ze sznurka — od delikatnych dekoracji po wyraziste, 
-        użytkowe projekty. Każdy splot powstaje ręcznie, w rytmie spokoju i uważności.
-      </p>
-      <div class="highlight">
-        Naturalne materiały. Spersonalizowane realizacje. Przedmioty z historią.
-      </div>
-
-      <div class="cta">
-        <a class="btn primary" href="https://www.instagram.com/lot_w_splot/" target="_blank">Instagram</a>
-        <a class="btn secondary" href="mailto:kontakt@lotwsplot.pl">Kontakt</a>
-      </div>
-
-      <footer>
-        © <span id="year"></span> Ewa Monika Jankowska — Lot w Splot
-      </footer>
-    </div>
-
-    <div class="panel">
-      <div class="section">
-        <h3>Oferta</h3>
-        <ul class="list">
-          <li>Makramy ścienne i dekoracje wnętrz</li>
-          <li>Akcesoria i elementy ubioru handmade</li>
-          <li>Projekty na zamówienie i personalizacja</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h3>Styl</h3>
-        <ul class="list">
-          <li>Minimalizm i naturalna estetyka</li>
-          <li>Ręczna praca, bez masowej produkcji</li>
-          <li>Funkcja spotyka formę</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h3>Dla kogo</h3>
-        <ul class="list">
-          <li>Wnętrza prywatne i pracownie</li>
-          <li>Kawiarnie, butiki, przestrzenie kreatywne</li>
-          <li>Osoby szukające unikatowych prezentów</li>
-        </ul>
-      </div>
-          <div class="section">
-        <h3>Wybrane prace</h3>
-        <div class="gallery">
-          <!-- Statyczne miniatury (fallback / natychmiast widoczne) -->
-          <img src="https://images.unsplash.com/photo-1611095564985-89765398121b?auto=format&fit=crop&w=400&q=60" alt="Makrama — detal splotu" />
-          <img src="https://images.unsplash.com/photo-1616627455530-48c5f11f5d45?auto=format&fit=crop&w=400&q=60" alt="Rękodzieło — projekt makramy" />
-          <img src="https://images.unsplash.com/photo-1603921326210-6edd2d60ca68?auto=format&fit=crop&w=400&q=60" alt="Dekoracja wnętrza — makrama" />
-          <img src="https://images.unsplash.com/photo-1582582429416-0d07b6a5f64c?auto=format&fit=crop&w=400&q=60" alt="Sznurek bawełniany — faktura" />
-          <img src="https://images.unsplash.com/photo-1621886456301-3f28c4b83c5c?auto=format&fit=crop&w=400&q=60" alt="Makrama — kompozycja ścienna" />
-          <img src="https://images.unsplash.com/photo-1590080877777-3f4c52a4a41d?auto=format&fit=crop&w=400&q=60" alt="Detal rękodzieła" />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      margin-top: 0.5rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-
-    @media (max-width: 768px) {
-      .gallery {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  </style>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    /*
-      AUTO-GALERIA INSTAGRAM (LEKKA, CACHE LOKALNY)
-      -------------------------------------------
-      Jak to działa:
-      - Pobiera publiczny JSON z profilu Instagram przez pośredni serwis (bez tokenów)
-      - Zapisuje wyniki w localStorage na 6h
-      - Wypełnia galerię najnowszymi zdjęciami
-
-      Jeśli chcesz pełną stabilność (produkcja / firma):
-      podmień fetch URL na własny endpoint (np. Cloudflare Worker / Netlify Function)
-    */
-
-    const IG_USER = "lot_w_splot";
-    const CACHE_KEY = "ig_cache_lot_w_splot";
-    const CACHE_TTL = 6 * 60 * 60 * 1000; // 6 godzin
-
-    const gallery = document.querySelector('.gallery');
-
-    function getCache() {
-      const raw = localStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-      try {
-        const parsed = JSON.parse(raw);
-        if (Date.now() - parsed.time > CACHE_TTL) return null;
-        return parsed.data;
-      } catch {
-        return null;
-      }
-    }
-
-    function setCache(data) {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({
-        time: Date.now(),
-        data
-      }));
-    }
-
-    function render(images) {
-      gallery.innerHTML = "";
-      images.slice(0, 6).forEach(url => {
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = "Projekt makramy — Lot w Splot";
-        gallery.appendChild(img);
-      });
-    }
-
-    async function loadInstagram() {
-      const cached = getCache();
-      if (cached) {
-        render(cached);
-        return;
-      }
-
-      try {
-        const res = await fetch(`https://r.jina.ai/https://www.instagram.com/${IG_USER}/?__a=1`);
-        const text = await res.text();
-
-        const matches = [...text.matchAll(/"display_url":"(https:[^\"]+)"/g)];
-        const images = matches.map(m => m[1].replace(/\u0026/g, '&'));
-
-        if (images.length) {
-          setCache(images);
-          render(images);
-        }
-      } catch (e) {
-        console.warn('Nie udało się załadować Instagrama, używam statycznych zdjęć.');
-      }
-    }
-
-    loadInstagram();
-
-    // PROFILOWE ZDJĘCIE ARTYSTKI (AUTO-PODMIANA Z INSTAGRAMA)
-    async function loadProfilePic() {
-      try {
-        const res = await fetch(`https://r.jina.ai/https://www.instagram.com/${IG_USER}/?__a=1`);
-        const text = await res.text();
-        const match = text.match(/"profile_pic_url_hd":"(https:[^\"]+)"/);
-        if (match && match[1]) {
-          const url = match[1].replace(/\u0026/g, '&');
-          document.getElementById('profilePic').src = url;
-        }
-      } catch (e) {
-        console.warn('Nie udało się pobrać zdjęcia profilowego, używam placeholdera.');
-      }
-    }
-
-    loadProfilePic();
-  </script>
-</body>
-</html>
+    .btn.primary { background: linear-gradient(180deg, #4a3a2a, #2b241d); color: #f5efe6; }
+    .btn.pr
