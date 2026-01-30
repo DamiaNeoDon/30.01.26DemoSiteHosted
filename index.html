@@ -8,11 +8,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f3efe9;
-      --ink: #2a2521;
-      --soft: #c9bfae;
-      --accent: #a4875f;
-      --rope: #e7dccb;
+      /* Paleta inspirowana bawełną, drewnem i lnem */
+      --bg: #f1ece4;
+      --ink: #2b241d;
+      --soft: #d6c9b6;
+      --accent: #b08a5a;
+      --rope: #eadfcd;
+      --wood: #8a6b4f;
       --card: #ffffff;
     }
 
@@ -21,52 +23,47 @@
     body {
       margin: 0;
       font-family: Inter, sans-serif;
-      background: linear-gradient(180deg, #faf7f2 0%, var(--bg) 100%);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.6), rgba(241,236,228,0.9)),
+        repeating-linear-gradient(
+          45deg,
+          rgba(176,138,90,0.04),
+          rgba(176,138,90,0.04) 2px,
+          transparent 2px,
+          transparent 8px
+        );
       color: var(--ink);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2.5rem;
+      padding: 3rem;
     }
 
     .card {
-      max-width: 900px;
+      max-width: 920px;
       width: 100%;
       background: var(--card);
-      border-radius: 28px;
-      box-shadow: 0 40px 90px rgba(0,0,0,0.1);
-      padding: 3.5rem 4rem;
+      border-radius: 32px;
+      box-shadow:
+        0 50px 100px rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      padding: 4rem 4.5rem;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 3.5rem;
+      gap: 4rem;
       position: relative;
       overflow: hidden;
     }
 
-    /* Makramowe "lina" w tle */
+    /* Subtelny makramowy wzór SVG w tle karty */
     .card::before {
       content: "";
       position: absolute;
-      top: -20%;
-      left: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle at 30% 30%, rgba(164,135,95,0.15), transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      bottom: -30%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle at 70% 70%, rgba(201,191,174,0.2), transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23b08a5a' stroke-opacity='0.08' stroke-width='2'%3E%3Cpath d='M100 0v200'/%3E%3Cpath d='M0 100h200'/%3E%3Cpath d='M0 0c100 100 100 100 200 0'/%3E%3Cpath d='M0 200c100-100 100-100 200 0'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
     }
 
     .brand, .panel {
@@ -75,13 +72,13 @@
     }
 
     .hero {
-      width: 140px;
-      height: 140px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       overflow: hidden;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.25);
-      margin-bottom: 2rem;
-      border: 6px solid var(--rope);
+      box-shadow: 0 25px 55px rgba(0,0,0,0.25);
+      margin-bottom: 2.5rem;
+      border: 8px solid var(--rope);
       background: var(--rope);
     }
 
@@ -93,31 +90,31 @@
 
     .brand h1 {
       font-family: "Playfair Display", serif;
-      font-size: 3.2rem;
-      margin: 0 0 0.75rem;
-      letter-spacing: 1px;
+      font-size: 3.4rem;
+      margin: 0 0 1rem;
+      letter-spacing: 1.5px;
     }
 
     .brand span {
       display: inline-block;
-      font-size: 0.8rem;
-      letter-spacing: 3px;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.75rem;
+      color: var(--wood);
+      margin-bottom: 2rem;
     }
 
     .about {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: #4a4036;
-      max-width: 440px;
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: #4b3f32;
+      max-width: 460px;
     }
 
     .highlight {
-      margin-top: 2rem;
-      padding-left: 1.5rem;
-      border-left: 4px solid var(--rope);
+      margin-top: 2.5rem;
+      padding-left: 2rem;
+      border-left: 5px solid var(--rope);
       color: #6b5a45;
       font-style: italic;
     }
@@ -126,13 +123,13 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 2.5rem;
+      gap: 3rem;
     }
 
     .section h3 {
-      margin: 0 0 1rem;
-      font-size: 0.75rem;
-      letter-spacing: 3px;
+      margin: 0 0 1.2rem;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--accent);
     }
@@ -141,39 +138,39 @@
       list-style: none;
       padding: 0;
       margin: 0;
-      line-height: 1.9;
-      color: #3d3328;
+      line-height: 2;
+      color: #3a3026;
     }
 
     .cta {
-      margin-top: 2.5rem;
+      margin-top: 3rem;
       display: flex;
-      gap: 1.25rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
 
     .btn {
       text-decoration: none;
-      padding: 0.9rem 1.8rem;
+      padding: 1rem 2.2rem;
       border-radius: 999px;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      transition: all 0.25s ease;
+      transition: all 0.3s ease;
     }
 
     .btn.primary {
-      background: linear-gradient(180deg, #3a2f24, #2a2521);
-      color: white;
+      background: linear-gradient(180deg, #4a3a2a, #2b241d);
+      color: #f5efe6;
     }
 
     .btn.primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
     }
 
     .btn.secondary {
-      border: 2px solid var(--rope);
+      border: 3px solid var(--rope);
       color: var(--ink);
       background: transparent;
     }
@@ -183,41 +180,41 @@
     }
 
     footer {
-      margin-top: 2.5rem;
-      font-size: 0.8rem;
-      color: #7a6a55;
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      color: #8a775f;
     }
 
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-top: 0.75rem;
+      gap: 1.2rem;
+      margin-top: 1rem;
     }
 
     .gallery img {
       width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      border: 3px solid var(--rope);
+      border-radius: 20px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 4px solid var(--rope);
     }
 
     .gallery img:hover {
-      transform: scale(1.08) rotate(-1deg);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+      transform: scale(1.1) rotate(-1.5deg);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.35);
     }
 
     @media (max-width: 768px) {
       .card {
         grid-template-columns: 1fr;
-        padding: 2.5rem;
+        padding: 3rem;
       }
 
       .brand h1 {
-        font-size: 2.4rem;
+        font-size: 2.5rem;
       }
 
       .gallery {
